@@ -1,38 +1,240 @@
-.App {
-  text-align: center;
+
+:root {
+  --color1: #C8DAE6;
+  --color2: white;
+  --color3: #B8B8B8;
+  --color4: #FFCD41;
+  --color5: #2092A9;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: lighten(var(--color1), 10%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.weather-wrapper {
+  margin: 15px 10px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.weather-card {
+  overflow: hidden;
+  border-radius: 12px;
+  
+  background-color: var(--color2);
+  box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  animation: appear 500ms ease-out forwards;
 }
 
-@keyframes App-logo-spin {
+.weather-card h1 {
+  position: absolute;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 50px;
+  color: var(--color3);
+  bottom: 0;
+  margin: 10px;
+  left: 35px;
+  opacity: 0;
+  transform: translateX(150px);
+  animation: title-appear 500ms ease-out 500ms forwards;
+}
+
+.weather-card p.description {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  color:#754949;
+  bottom: 0;
+  margin-left: 10px;
+  margin-top: 10px;
+  left: 35px;
+  animation: title-appear 1s ease-out 500ms forwards;
+}
+.weather-card p.temp {
+  font-family: 'Lato', sans-serif;
+  position:absolute;
+  font-weight: 300;
+  font-size: 20px;
+  color:#8d75ee;
+  bottom: 0;
+  margin:10px;
+  left: 35px;
+  animation: title-appear 1s ease-out 500ms forwards;
+}
+
+.weather-icon {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  float: right;
+  margin: 40px 40px 0 0;
+  animation: weather-icon-move 5s ease-in-out infinite;
+}
+
+.weather-icon.sun {
+  background: var(--color4);
+  border-radius: 50%;
+  box-shadow: rgba(255, 255, 0, 0.1) 0 0 0 4px;
+  animation: light 800ms ease-in-out infinite alternate, weather-icon-move 5s ease-in-out infinite;
+}
+
+@keyframes light {
   from {
-    transform: rotate(0deg);
+    box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 10px;
   }
   to {
-    transform: rotate(360deg);
+    box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 17px;
+  }
+}
+
+
+  .weather-icon.cloud.cloud {
+    margin-right: 60px;
+    background-color: rgba(200, 218, 230, 0.95);
+    border-radius: 20px;
+    width: 22px;
+    height: 22px;
+    box-shadow:
+      24px -6px 0 2px rgba(200, 218, 230, 1),
+      10px 5px 0 5px rgba(200, 218, 230, 1),
+      30px 5px 0 2px rgba(200, 218, 230, 1),
+      11px -8px 0 -3px rgba(200, 218, 230, 1),
+      25px 11px 0 -1px rgba(200, 218, 230, 1);
+  }
+
+
+.weather-icon.rain.rain {
+  margin-right: 60px;
+  background-color: rgba(200, 218, 230, 0.95);
+  border-radius: 20px;
+  width: 22px;
+  height: 22px;
+  box-shadow:
+    24px -6px 0 2px rgba(200, 218, 230, 1),
+    10px 5px 0 5px rgba(200, 218, 230, 1),
+    30px 5px 0 2px rgba(200, 218, 230, 1),
+    11px -8px 0 -3px rgba(200, 218, 230, 1),
+    25px 11px 0 -1px rgba(200, 218, 230, 1);
+}
+
+.weather-icon.rain:after {
+content: "";
+position: absolute;
+border-radius: 10px;
+background-color: transparent;
+width: 3px;
+height: 10px;
+left: 0;
+top: 31px;
+transform: rotate(30deg);
+animation: rain 800ms ease-in-out infinite alternate;
+}
+.weather-icon.snow.snow {
+  margin-right: 60px;
+  background-color: rgba(200, 218, 230, 0.95);
+  border-radius: 20px;
+  width: 22px;
+  height: 22px;
+  box-shadow:
+    24px -6px 0 2px rgba(200, 218, 230, 1),
+    10px 5px 0 5px rgba(200, 218, 230, 1),
+    30px 5px 0 2px rgba(200, 218, 230, 1),
+    11px -8px 0 -3px rgba(200, 218, 230, 1),
+    25px 11px 0 -1px rgba(200, 218, 230, 1);
+
+  /* Snow animation */
+  position: relative;
+  overflow: hidden;
+}
+.weather-icon.snow.snow:before {
+  content: "";
+  position: absolute;
+  border-radius: 10px;
+  background-color: #fff; /* Use appropriate color for snowflake */
+  width: 12px; /* Increase snowflake size */
+  height: 12px; /* Increase snowflake size */
+  top: -12px; /* Start position above the element */
+  opacity: 0.8; /* Adjust opacity to make the snowflake more visible */
+  animation: snow 1600ms ease-in-out infinite; /* Adjust the animation duration */
+}
+
+.weather-icon.snow.snow::before,
+.weather-icon.snow.snow::after {
+  /* Add more snowflakes with ::before and ::after */
+  content: "";
+  position: absolute;
+  border-radius: 10px;
+  background-color: #fff; /* Use appropriate color for snowflakes */
+  width: 8px;
+  height: 8px;
+  top: -8px; /* Start position above the element */
+  opacity: 0; /* Start with 0 opacity */
+  animation: snow 1600ms ease-in-out infinite; /* Adjust the animation duration */
+  left: 50%; /* Position snowflakes at different horizontal points */
+  transform: translateX(-50%); /* Center the snowflakes horizontally */
+}
+
+
+@keyframes rain {
+  from {
+    box-shadow: var(--color5) 8px 0px,
+                var(--color5) 32px -6px,
+                var(--color5) 20px 0px;
+  }
+  to {
+    box-shadow: var(--color5) 8px 6px,
+                var(--color5) 32px 0px,
+                var(--color5) 20px 6px;
+  }
+}
+
+@keyframes weather-icon-move {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+
+@keyframes appear {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  75% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes title-appear {
+  from {
+    opacity: 0;
+    transform: translateX(150px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes snow {
+  50%, 100% {
+    top: -8px; /* Start and end position above the element */
+    opacity: 0; /* Start and end with 0 opacity */
+    transform: rotate(0deg) scale(1); /* Initial and final snowflake rotation and scale */
+  }
+  100% {
+    top: 50px; /* Middle position below the element */
+    opacity: 1; /* Full opacity in the middle */
+    transform: rotate(360deg) scale(0.8); /* Snowflake rotation and scale in the middle */
   }
 }

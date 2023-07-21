@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import Search from './components/search';
+import WeatherCard from './components/weathercard';
+import { useSelector } from 'react-redux';
+import Loading from './components/Loading';
+import Toast from './components/Error';
+import Footer from './components/Footer';
+
 
 function App() {
+  const {DataStatus} = useSelector((state) => state.weather.DataStatus)
+  if(DataStatus === "loading") return <Loading/>
+  if(DataStatus === "failed") return <Toast message={"failed"}/>
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <div className='w-full h-full'>
+   <Search/>
+   <WeatherCard/>
+   <Footer/>
+  </div>
   );
 }
 
