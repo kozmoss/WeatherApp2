@@ -7,8 +7,8 @@ import { fetchCityData,fetchCurrentData,fetchWeatherData } from '../redux/weathe
 
     const WeatherCard = () => {
       const { dailyData,DataStatus } = useSelector((state) => state.weather);
+      const coord = {lat: 41.0351,lon: 28.9833};
       const dispatch = useDispatch();
-      const coord = { lat: 41.0351, lon: 28.9833 };
       useEffect(()=>{
       if(DataStatus === ""){
         dispatch(fetchWeatherData(coord))
@@ -16,7 +16,7 @@ import { fetchCityData,fetchCurrentData,fetchWeatherData } from '../redux/weathe
       dispatch(fetchCurrentData("istanbul"));
       
       }
-      },[DataStatus,coord,dispatch])
+      },[DataStatus,dispatch])
 
    
         return (
