@@ -2,7 +2,7 @@
 
 ***
 
-## Demo : https://covid19-sb.netlify.app/
+## Demo : [https://kozmossweatherapp.netlify.app/]
 
 ***
 
