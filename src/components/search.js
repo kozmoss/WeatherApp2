@@ -9,7 +9,6 @@ function Search() {
   const [message, setMessage] = useState(false);
   const dispatch = useDispatch();
     const {coord} = useSelector((state) => state.weather)
-    const { fetchDataStatus, CurrentDataStatus, currentData } = useSelector((state) => state.weather)
     const handleSubmit = (event) => {
       event.preventDefault();
       const validCity = /^([A-Za-zğüşöçıİĞÜŞÖÇ\s]*)$/gi;

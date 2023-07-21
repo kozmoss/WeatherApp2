@@ -1,8 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { useState,useEffect } from 'react'
 import moment from 'moment';
-
 
 const DayCard = ({weather}) => {
   const [daily,setDaily] = useState({})
@@ -21,7 +19,7 @@ const DayCard = ({weather}) => {
 
       setDaily(day);
     }
-  }, [moment, weather]);
+  }, [weather]);
 
   if (Object.keys(daily).length === 0) return;
   const getWeatherIconClass = (description) => {
