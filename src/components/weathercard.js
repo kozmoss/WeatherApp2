@@ -16,7 +16,7 @@ import { fetchCityData,fetchCurrentData,fetchWeatherData } from '../redux/weathe
       dispatch(fetchCurrentData("istanbul"));
       
       }
-      },[DataStatus,dispatch])
+      },[coord,dispatch])
 
    
         return (
